@@ -1,0 +1,9 @@
+src
+tests
+.github
+.plan
+.env.example
+SPEC.md
+tsconfig.json
+tsup.config.ts
+vitest.config.ts

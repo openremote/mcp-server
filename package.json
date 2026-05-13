@@ -1,0 +1,49 @@
+{
+  "name": "@openremote/mcp-server",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "MCP server for OpenRemote IoT platform — exposes asset and attribute operations as tools and resources for AI assistants. (Beta)",
+  "main": "dist/index.js",
+  "files": ["dist", "README.md", "LICENSE"],
+  "bin": { "openremote-mcp": "dist/index.js" },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "openremote",
+    "iot",
+    "claude",
+    "anthropic",
+    "ai",
+    "assistant"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openremote/mcp-server.git"
+  },
+  "homepage": "https://github.com/openremote/mcp-server#readme",
+  "bugs": { "url": "https://github.com/openremote/mcp-server/issues" },
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@openremote/model": "^1.22.0",
+    "@openremote/rest": "^1.22.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.6"
+  },
+  "license": "AGPL-3.0-or-later",
+  "engines": { "node": ">=24" }
+}
