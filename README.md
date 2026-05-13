@@ -115,18 +115,6 @@ Use the official [MCP Inspector](https://github.com/modelcontextprotocol/inspect
 npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
-## Roadmap (post-1.0)
-
-- Streamable HTTP transport
-- Rule CRUD tools (`create_ruleset`, etc.) and rule-model resources
-- Per-asset / per-attribute MCP resources
-- Resource subscriptions
-- Realm CRUD
-
-## Listing on mcpservers.org
-
-After publishing, submit (or update the existing OpenRemote entry on) [mcpservers.org](https://mcpservers.org) by opening a PR to its registry repo pointing at `@openremote/mcp-server` on npm. Provenance attestations from this repo's publish workflow give consumers a verifiable build.
-
 ## License
 
 [AGPL-3.0-or-later](./LICENSE). Copyright OpenRemote contributors.
