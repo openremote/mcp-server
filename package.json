@@ -1,6 +1,6 @@
 {
   "name": "@openremote/mcp-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "MCP server for OpenRemote IoT platform — exposes asset and attribute operations as tools and resources for AI assistants. (Beta)",
   "main": "dist/index.js",
