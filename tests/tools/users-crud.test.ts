@@ -6,7 +6,6 @@ const restMocks = vi.hoisted(() => ({
   UserResource: {
     query: vi.fn(),
     get: vi.fn(),
-    getCurrent: vi.fn(),
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
@@ -54,14 +53,6 @@ describe("users-crud tools", () => {
     const { tools } = setup();
     await tools.get_user({ realm: "master", userId: "u1" });
     expect(restMocks.UserResource.get).toHaveBeenCalledWith("master", "u1");
-  });
-
-  it("get_current_user takes no args", async () => {
-    restMocks.UserResource.getCurrent.mockResolvedValue({ data: { id: "self" } });
-    const { tools } = setup();
-    const res = await tools.get_current_user({});
-    expect(restMocks.UserResource.getCurrent).toHaveBeenCalledWith();
-    expect(JSON.parse(res.content[0].text).id).toBe("self");
   });
 
   it("create_user wraps user object", async () => {

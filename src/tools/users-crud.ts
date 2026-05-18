@@ -78,27 +78,6 @@ export function registerUserCrudTools(server: McpServer) {
     },
   );
 
-  server.registerTool(
-    "get_current_user",
-    {
-      description:
-        "Get the currently authenticated user (the service user the MCP server runs as).",
-      inputSchema: {},
-    },
-    async () => {
-      try {
-        const response = await rest.api.UserResource.getCurrent();
-        return {
-          content: [
-            { type: "text", text: JSON.stringify(response.data, null, 2) },
-          ],
-        };
-      } catch (err) {
-        return errorResult(err);
-      }
-    },
-  );
-
   const userBodySchema = z
     .object({
       id: z.string().optional(),
