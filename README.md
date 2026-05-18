@@ -6,7 +6,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 
 ## Capabilities
 
-### Tools (49)
+### Tools (43)
 
 | Tool | Purpose |
 |---|---|
@@ -25,15 +25,11 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 | `get_meta_item_descriptors` | List meta item descriptors |
 | `query_users` | Query users with filters (realm, role, predicate) |
 | `get_user` | Read a single user by ID within a realm |
-| `get_current_user` | Read the currently authenticated user |
 | `create_user` | Create a user in a realm |
 | `update_user` | Replace a user object (read first for partial updates) |
 | `delete_user` | Delete a user from a realm |
 | `request_password_reset` | Trigger Keycloak password-reset email for a user |
 | `request_current_password_reset` | Trigger reset email for current user |
-| `update_password` | Directly set a user's password |
-| `update_current_password` | Set the current user's password |
-| `reset_user_secret` | Regenerate a service user's OAuth client secret |
 | `get_client_roles` | List role catalog for a client in a realm |
 | `update_client_roles` | Replace client role catalog |
 | `update_realm_roles` | Replace realm role catalog |
@@ -43,8 +39,6 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 | `update_user_client_roles` | Replace client role assignments |
 | `get_current_user_realm_roles` | List current user's realm roles |
 | `get_current_user_client_roles` | List current user's client roles |
-| `get_user_sessions` | List active Keycloak sessions for a user |
-| `disconnect_user_session` | Force-logout a specific session |
 | `update_current_user` | Update the current user's profile |
 | `update_current_user_locale` | Set the current user's locale code |
 | `list_realms` | List ALL realms (admin) |
