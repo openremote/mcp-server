@@ -42,7 +42,7 @@ Tools — users (Keycloak-backed):
 - get_client_roles / update_client_roles / update_realm_roles / get_user_realm_roles / update_user_realm_roles / get_user_client_roles / update_user_client_roles / get_current_user_realm_roles / get_current_user_client_roles
 - update_current_user / update_current_user_locale
 
-Tools — realms (admin):
+Tools — realms:
 - list_realms / list_accessible_realms / get_realm / create_realm / update_realm / delete_realm
 
 Tools — system:
