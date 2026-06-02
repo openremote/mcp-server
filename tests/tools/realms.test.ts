@@ -68,14 +68,15 @@ describe("realms tools", () => {
     });
   });
 
-  it("update_realm passes (name, body)", async () => {
+  it("update_realm passes (name, body) including required id", async () => {
     restMocks.RealmResource.update.mockResolvedValue({ data: undefined });
     const { tools } = setup();
     await tools.update_realm({
       name: "smartcity",
-      realm: { displayName: "Smart City" },
+      realm: { id: "realm-uuid", displayName: "Smart City" },
     });
     expect(restMocks.RealmResource.update).toHaveBeenCalledWith("smartcity", {
+      id: "realm-uuid",
       displayName: "Smart City",
     });
   });

@@ -63,7 +63,7 @@ Tests do **not** instantiate a real `McpServer`. `tests/helpers/capture.ts::capt
 
 ## Scope boundaries (beta)
 
-The v0.x line covers: stdio transport only; assets + attributes + asset-model; realms (read in v0.1.0, full CRUD in v0.2.0); users (Keycloak-backed: CRUD + roles + self-service + password-reset email flow, v0.2.0; sessions and direct-credential mutation deferred — destructive footguns and LLM-context credential leakage); system status (health + info, v0.2.0); syslog (events + config, v0.2.0).
+The v0.x line covers: stdio transport only; assets + attributes + asset-model; realms (read in v0.1.0, full CRUD in v0.2.0); users (Keycloak-backed: CRUD + roles + password-reset email flow, v0.2.0; sessions, direct-credential mutation, and self-service profile/locale writes excluded. Sessions/credentials are destructive footguns with LLM-context credential leakage; self-service writes (`update_current_user`, `update_current_user_locale`) are useless under service-account auth: the former 405s because the body's `isServiceAccount` defaults to false while the stored record is a service account, the latter is a no-op with no UI session); system status (health + info, v0.2.0); syslog (events + config, v0.2.0).
 
 **Out of scope and should not be added without an explicit ask**: HTTP/SSE transports, rule CRUD or rule-model tools (`RulesResource`, `FlowResource`), per-asset/per-attribute MCP resources, resource subscriptions, Docker artifacts, and the following Resource interfaces (deferred to v0.3.0+): `AlarmResource`, `NotificationResource`, `AppResource`, `ConsoleResource`, `AgentResource`, `DashboardResource`, `AssetPredictedDatapointResource`, `GatewayClientResource`, `GatewayServiceResource`, `ConfigurationResource`, `MapResource`, `ProvisioningResource`, `ExternalServiceResource`.
 
@@ -71,7 +71,7 @@ The README's "beta" banner is load-bearing — any breaking change is allowed be
 
 ### Conventions for new tool files (v0.2.0 onward)
 
-When a Resource interface has many endpoints (e.g. `UserResource`), split into themed sub-files (`users-crud.ts`, `users-passwords.ts`, `users-roles.ts`, `users-self.ts`) rather than one monolithic file. Each sub-file gets its own `registerXxx` exporter and matching test file. Cohesion guideline: keep each file under ~250 lines and centred on a single concern.
+When a Resource interface has many endpoints (e.g. `UserResource`), split into themed sub-files (`users-crud.ts`, `users-passwords.ts`, `users-roles.ts`) rather than one monolithic file. Each sub-file gets its own `registerXxx` exporter and matching test file. Cohesion guideline: keep each file under ~250 lines and centred on a single concern.
 
 For endpoints where the backend replaces the entire object on PUT (`update_user`, `update_realm`, `update_syslog_config`), the tool description must say so explicitly — LLM-driven partial updates require a read-modify-write performed by the caller, not the tool. Only `update_attribute_meta` and `update_asset` do the read-modify-write internally; new tools must not silently introduce this pattern.
 

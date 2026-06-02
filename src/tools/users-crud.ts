@@ -79,7 +79,7 @@ export function registerUserCrudTools(server: McpServer) {
   );
 
   const userBodySchema = z
-    .object({
+    .looseObject({
       id: z.string().optional(),
       username: z.string().optional(),
       email: z.string().optional(),
@@ -88,7 +88,6 @@ export function registerUserCrudTools(server: McpServer) {
       enabled: z.boolean().optional(),
       attributes: z.record(z.string(), z.any()).optional(),
     })
-    .passthrough()
     .describe("User object (Keycloak user representation). Unknown keys are forwarded.");
 
   server.registerTool(

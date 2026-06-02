@@ -6,7 +6,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 
 ## Capabilities
 
-### Tools (43)
+### Tools (41)
 
 | Tool | Purpose |
 |---|---|
@@ -39,8 +39,6 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 | `update_user_client_roles` | Replace client role assignments |
 | `get_current_user_realm_roles` | List current user's realm roles |
 | `get_current_user_client_roles` | List current user's client roles |
-| `update_current_user` | Update the current user's profile |
-| `update_current_user_locale` | Set the current user's locale code |
 | `list_realms` | List ALL realms (admin) |
 | `list_accessible_realms` | List realms accessible to current user |
 | `get_realm` | Read a single realm by name |

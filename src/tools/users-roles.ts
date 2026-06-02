@@ -4,7 +4,7 @@ import rest from "@openremote/rest";
 import { errorResult } from "../error.js";
 
 const roleObjectSchema = z
-  .object({
+  .looseObject({
     id: z.string().optional(),
     name: z.string(),
     description: z.string().optional(),
@@ -12,7 +12,6 @@ const roleObjectSchema = z
     clientRole: z.boolean().optional(),
     containerId: z.string().optional(),
   })
-  .passthrough()
   .describe("Keycloak Role representation");
 
 function json(data: unknown) {
@@ -131,12 +130,13 @@ export function registerUserRoleTools(server: McpServer) {
   server.registerTool(
     "update_user_client_roles",
     {
-      description: "Replace the client-role assignments for a user on a specific client.",
+      description:
+        "Replace the client-role assignments for a user on a specific client. `roles` is an array of role NAME strings (e.g. [\"read:assets\"]), not role objects — source them from get_user_client_roles (which returns names) or from the `name` field of get_client_roles objects. Existing assignments not in the array are removed.",
       inputSchema: {
         realm: z.string(),
         userId: z.string(),
         clientId: z.string(),
-        roles: z.array(z.string()),
+        roles: z.array(z.string()).describe("Role name strings, e.g. [\"read:assets\"]"),
       },
     },
     async ({ realm, userId, clientId, roles }) => {

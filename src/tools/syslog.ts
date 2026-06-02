@@ -18,12 +18,11 @@ const syslogCategorySchema = z.enum([
 ]);
 
 const syslogConfigSchema = z
-  .object({
+  .looseObject({
     storedLevel: syslogLevelSchema.optional(),
     storedMaxAgeMinutes: z.number().int().optional(),
     storedCategories: z.array(syslogCategorySchema).optional(),
   })
-  .passthrough()
   .describe("OpenRemote SyslogConfig object");
 
 function json(data: unknown) {
