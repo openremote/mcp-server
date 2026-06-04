@@ -83,10 +83,10 @@ describe("syslog tools", () => {
     restMocks.SyslogResource.updateConfig.mockResolvedValue({ data: undefined });
     const { tools } = setup();
     await tools.update_syslog_config({
-      config: { storedLevel: "DEBUG", storedMaxAgeMinutes: 60 },
+      config: { storedLevel: "WARN", storedMaxAgeMinutes: 60 },
     });
     expect(restMocks.SyslogResource.updateConfig).toHaveBeenCalledWith({
-      storedLevel: "DEBUG", storedMaxAgeMinutes: 60,
+      storedLevel: "WARN", storedMaxAgeMinutes: 60,
     });
   });
 });

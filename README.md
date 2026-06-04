@@ -29,7 +29,6 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 | `update_user` | Replace a user object (read first for partial updates) |
 | `delete_user` | Delete a user from a realm |
 | `request_password_reset` | Trigger Keycloak password-reset email for a user |
-| `request_current_password_reset` | Trigger reset email for current user |
 | `get_client_roles` | List role catalog for a client in a realm |
 | `update_client_roles` | Replace client role catalog |
 | `update_realm_roles` | Replace realm role catalog |

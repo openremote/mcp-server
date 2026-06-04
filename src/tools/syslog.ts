@@ -3,18 +3,21 @@ import { z } from "zod";
 import rest from "@openremote/rest";
 import { errorResult } from "../error.js";
 
-const syslogLevelSchema = z.enum(["DEBUG", "INFO", "WARN", "ERROR"]);
+// Mirror @openremote/model SyslogLevel / SyslogCategory. The model declares
+// these as ambient `const enum`s, so they can't be derived via Object.values
+// under tsc (TS2475) — keep these literals in sync on @openremote/model bumps.
+const syslogLevelSchema = z.enum(["INFO", "WARN", "ERROR"]);
 const syslogCategorySchema = z.enum([
-  "MANAGER",
-  "AGENT",
   "ASSET",
+  "AGENT",
+  "NOTIFICATION",
+  "ALARM",
   "RULES",
-  "MODEL_AND_VALUES",
   "PROTOCOL",
   "GATEWAY",
-  "DATA",
+  "MODEL_AND_VALUES",
   "API",
-  "NOTIFICATION",
+  "DATA",
 ]);
 
 const syslogConfigSchema = z

@@ -9,6 +9,7 @@ const restMocks = vi.hoisted(() => ({
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
+    requestPasswordReset: vi.fn(),
   },
 }));
 
@@ -90,12 +91,30 @@ describe("users-crud tools", () => {
     expect(res.content[0].text).toMatch(/Deleted user u1/);
   });
 
+  it("request_password_reset passes realm + userId", async () => {
+    restMocks.UserResource.requestPasswordReset.mockResolvedValue({ data: undefined });
+    const { tools } = setup();
+    const res = await tools.request_password_reset({ realm: "master", userId: "u1" });
+    expect(restMocks.UserResource.requestPasswordReset).toHaveBeenCalledWith("master", "u1");
+    expect(res.content[0].text).toMatch(/Password reset requested/);
+  });
+
   it("error path uses errorResult", async () => {
     restMocks.UserResource.get.mockRejectedValue(
       makeAxiosError(404, { message: "User not found" }),
     );
     const { tools } = setup();
     const res = await tools.get_user({ realm: "master", userId: "missing" });
+    expect(res.isError).toBe(true);
+    expect(JSON.parse(res.content[0].text).status).toBe(404);
+  });
+
+  it("request_password_reset error path uses errorResult", async () => {
+    restMocks.UserResource.requestPasswordReset.mockRejectedValue(
+      makeAxiosError(404, { message: "User not found" }),
+    );
+    const { tools } = setup();
+    const res = await tools.request_password_reset({ realm: "master", userId: "missing" });
     expect(res.isError).toBe(true);
     expect(JSON.parse(res.content[0].text).status).toBe(404);
   });

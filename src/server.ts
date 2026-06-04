@@ -6,7 +6,6 @@ import { registerAssetModelTools } from "./tools/asset-model.js";
 import { registerAttributeHistoryTool } from "./tools/attribute-history.js";
 import { registerAttributeMetaTool } from "./tools/attribute-meta.js";
 import { registerUserCrudTools } from "./tools/users-crud.js";
-import { registerUserPasswordTools } from "./tools/users-passwords.js";
 import { registerUserRoleTools } from "./tools/users-roles.js";
 import { registerRealmTools } from "./tools/realms.js";
 import { registerStatusTools } from "./tools/status.js";
@@ -37,7 +36,7 @@ Tools — assets and attributes:
 
 Tools — users (Keycloak-backed):
 - query_users / get_user / create_user / update_user / delete_user
-- request_password_reset / request_current_password_reset
+- request_password_reset
 - get_client_roles / update_client_roles / update_realm_roles / get_user_realm_roles / update_user_realm_roles / get_user_client_roles / update_user_client_roles / get_current_user_realm_roles / get_current_user_client_roles
 
 Tools — realms:
@@ -67,7 +66,6 @@ Recommended flow: attach asset-model resources or call get_asset_types before cr
   registerAttributeHistoryTool(server);
   registerAttributeMetaTool(server);
   registerUserCrudTools(server);
-  registerUserPasswordTools(server);
   registerUserRoleTools(server);
   registerRealmTools(server);
   registerStatusTools(server);

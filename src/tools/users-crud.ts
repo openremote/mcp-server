@@ -160,4 +160,25 @@ export function registerUserCrudTools(server: McpServer) {
       }
     },
   );
+
+  server.registerTool(
+    "request_password_reset",
+    {
+      description:
+        "Trigger Keycloak's password-reset email flow for a user in a realm. Requires `write:admin`. Requires a configured SMTP/mail server on the deployment — without one the backend returns a 500 (IllegalStateException), not a 4xx, and the error cannot be distinguished from an invalid user id.",
+      inputSchema: { realm: z.string(), userId: z.string() },
+    },
+    async ({ realm, userId }) => {
+      try {
+        await rest.api.UserResource.requestPasswordReset(realm, userId);
+        return {
+          content: [
+            { type: "text", text: `Password reset requested for user ${userId} in ${realm}` },
+          ],
+        };
+      } catch (err) {
+        return errorResult(err);
+      }
+    },
+  );
 }
