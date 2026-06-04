@@ -6,7 +6,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 
 ## Capabilities
 
-### Tools (10)
+### Tools (41)
 
 | Tool | Purpose |
 |---|---|
@@ -19,12 +19,39 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 | `write_attribute` | Write a single attribute value |
 | `write_attributes` | Bulk write across assets |
 | `get_attribute_history` | Time-series datapoints (`lttb`/`all`/`interval`/`nearest`) |
-| `update_attribute_meta` | Partial-merge meta on one attribute (`label`, `units`, `ruleState`, …) |
+| `update_attribute_meta` | Partial-merge meta on one attribute |
 | `get_asset_types` | List asset type descriptors |
 | `get_value_descriptors` | List value type descriptors |
 | `get_meta_item_descriptors` | List meta item descriptors |
+| `query_users` | Query users with filters (realm, role, predicate) |
+| `get_user` | Read a single user by ID within a realm |
+| `create_user` | Create a user in a realm |
+| `update_user` | Replace a user object (read first for partial updates) |
+| `delete_user` | Delete a user from a realm |
+| `request_password_reset` | Trigger Keycloak password-reset email for a user |
+| `get_client_roles` | List role catalog for a client in a realm |
+| `update_client_roles` | Replace client role catalog |
+| `update_realm_roles` | Replace realm role catalog |
+| `get_user_realm_roles` | List realm roles assigned to a user |
+| `update_user_realm_roles` | Replace realm role assignments |
+| `get_user_client_roles` | List client roles assigned to a user |
+| `update_user_client_roles` | Replace client role assignments |
+| `get_current_user_realm_roles` | List current user's realm roles |
+| `get_current_user_client_roles` | List current user's client roles |
+| `list_realms` | List ALL realms (admin) |
+| `list_accessible_realms` | List realms accessible to current user |
+| `get_realm` | Read a single realm by name |
+| `create_realm` | Create a new realm |
+| `update_realm` | Replace a realm object |
+| `delete_realm` | Delete a realm (cascades to users/assets/rules) |
+| `get_health_status` | System health (DB, gateway, …) |
+| `get_system_info` | Version + build metadata |
+| `query_syslog_events` | Filter syslog events (level, time, category) |
+| `clear_syslog_events` | Delete all stored syslog events |
+| `get_syslog_config` | Read syslog persistence config |
+| `update_syslog_config` | Replace syslog persistence config |
 
-### Resources (4)
+### Resources (6)
 
 | URI | What |
 |---|---|
@@ -32,6 +59,8 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server for the [Open
 | `openremote://asset-model/values` | Catalog of value types and constraints |
 | `openremote://asset-model/meta` | Catalog of meta item descriptors |
 | `openremote://realm/{name}` | A realm definition (templated; `list` enumerates accessible realms) |
+| `openremote://status/health` | Live system health snapshot |
+| `openremote://status/info` | Version + build metadata |
 
 ## Install
 
@@ -114,6 +143,15 @@ Use the official [MCP Inspector](https://github.com/modelcontextprotocol/inspect
 ```bash
 npx @modelcontextprotocol/inspector node dist/index.js
 ```
+
+## Roadmap
+
+Deferred to v0.3.0+:
+
+- HTTP / SSE transports
+- Rule CRUD (`RulesResource`, `FlowResource`)
+- Per-asset / per-attribute MCP resources, resource subscriptions
+- `AlarmResource`, `NotificationResource`, `AppResource`, `ConsoleResource`, `AgentResource`, `DashboardResource`, `AssetPredictedDatapointResource`, `GatewayClientResource`, `GatewayServiceResource`, `ConfigurationResource`, `MapResource`, `ProvisioningResource`, `ExternalServiceResource`
 
 ## License
 
